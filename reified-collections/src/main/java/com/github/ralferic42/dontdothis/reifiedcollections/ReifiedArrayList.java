@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.UnaryOperator;
 
+/**
+ * derivation of {@link ArrayList} with type checking in all state-modifying methods
+ * @param <E> Element Type
+ */
 public abstract class ReifiedArrayList<E>
 extends ArrayList<E> {
 
-  protected class ValidatingOperator
+  protected final class ValidatingOperator
   implements UnaryOperator<E> {
     private final UnaryOperator<E> wrappedOperator;
 
@@ -22,11 +26,30 @@ extends ArrayList<E> {
 
   }
 
-  protected E validateElement(E elementToCheck ) {
+  public ReifiedArrayList(int initialCapacity) {
+    super(initialCapacity);
+  }
+
+  public ReifiedArrayList() {
+    super();
+  }
+
+  public ReifiedArrayList(Collection<? extends E> c) {
+    // TODO: initialize validation here
+    super.addAll( validateCollection(c) );
+  }
+
+  /**
+   * validation of a single element, this method is called from inside the constructor and must be final
+   */
+  protected final E validateElement(E elementToCheck ) {
     return elementToCheck;
   }
 
-  protected Collection<? extends E> validateCollection( Collection<? extends E> collectionToCheck ) {
+  /**
+   * validation of a collection of elements, this method is called from inside the constructor and must be final
+   */
+  protected final Collection<? extends E> validateCollection( Collection<? extends E> collectionToCheck ) {
     return collectionToCheck;
   }
 
