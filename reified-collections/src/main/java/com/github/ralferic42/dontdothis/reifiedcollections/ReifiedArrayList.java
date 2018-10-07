@@ -2,10 +2,11 @@ package com.github.ralferic42.dontdothis.reifiedcollections;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.UnaryOperator;
 
 /**
- * drop-in replavement for {@link ArrayList} with type checking in all state-modifying methods
+ * drop-in replacement for {@link ArrayList} with type checking in all state-modifying methods
  * This should have been implemented as a decorator, but that would no longer be a drop-in replacement
  * for ArrayList. A decorator would have been protected against extensions of the base class.
  * @param <E> Element Type
@@ -28,23 +29,40 @@ extends ArrayList<E> {
 
   }
 
+  private final Class<?> classToCheckAgainst;
+
   public ReifiedArrayList(int initialCapacity) {
     super(initialCapacity);
+    this.classToCheckAgainst = geTypeArgument();
   }
 
   public ReifiedArrayList() {
     super();
+    this.classToCheckAgainst = geTypeArgument();
   }
 
   public ReifiedArrayList(Collection<? extends E> c) {
-    // TODO: initialize validation here
     super.addAll( validateCollection(c) );
+    this.classToCheckAgainst = geTypeArgument();
+  }
+
+  private final Class<?> geTypeArgument() {
+    List<Class<?>> typeArguments = new GenericTypeScanner().scanForGenericTypes(this);
+    if (typeArguments.size()==1) {
+      return typeArguments.get(0);
+    }
+    else {
+      throw new IllegalArgumentException("this class is currently limited to one type Argument only");
+    }
   }
 
   /**
    * validation of a single element, this method is called from inside the constructor and must be final
    */
   protected final E validateElement(E elementToCheck ) {
+    if (classToCheckAgainst!=null && !classToCheckAgainst.isInstance(elementToCheck)) {
+      throw new IllegalArgumentException( "new element is not an instance of "+classToCheckAgainst.getName());
+    }
     return elementToCheck;
   }
 
@@ -52,6 +70,13 @@ extends ArrayList<E> {
    * validation of a collection of elements, this method is called from inside the constructor and must be final
    */
   protected final Collection<? extends E> validateCollection( Collection<? extends E> collectionToCheck ) {
+    if (classToCheckAgainst!=null) {
+      for (E newElement : collectionToCheck) {
+        if (!classToCheckAgainst.isInstance(newElement)) {
+          throw new IllegalArgumentException( "new element is not an instance of "+classToCheckAgainst.getName());
+        }
+      }
+    }
     return collectionToCheck;
   }
 
