@@ -5,7 +5,9 @@ import java.util.Collection;
 import java.util.function.UnaryOperator;
 
 /**
- * derivation of {@link ArrayList} with type checking in all state-modifying methods
+ * drop-in replavement for {@link ArrayList} with type checking in all state-modifying methods
+ * This should have been implemented as a decorator, but that would no longer be a drop-in replacement
+ * for ArrayList. A decorator would have been protected against extensions of the base class.
  * @param <E> Element Type
  */
 public abstract class ReifiedArrayList<E>
