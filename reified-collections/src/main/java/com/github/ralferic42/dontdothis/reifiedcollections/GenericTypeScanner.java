@@ -19,7 +19,12 @@ public class GenericTypeScanner {
       ParameterizedType parameterizedType = (ParameterizedType) genericSuperclass;
       Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
       for (Type t : actualTypeArguments) {
-        resultList.add((Class<?>) t);
+        if (t instanceof ParameterizedType) {
+          resultList.add( (Class<?>) (((ParameterizedType) t).getRawType()));
+        }
+        else {
+          resultList.add((Class<?>) t);
+        }
       }
     }
     return resultList;
