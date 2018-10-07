@@ -33,20 +33,20 @@ extends ArrayList<E> {
 
   public ReifiedArrayList(int initialCapacity) {
     super(initialCapacity);
-    this.classToCheckAgainst = geTypeArgument();
+    this.classToCheckAgainst = getTypeArgument();
   }
 
   public ReifiedArrayList() {
     super();
-    this.classToCheckAgainst = geTypeArgument();
+    this.classToCheckAgainst = getTypeArgument();
   }
 
   public ReifiedArrayList(Collection<? extends E> c) {
     super.addAll( validateCollection(c) );
-    this.classToCheckAgainst = geTypeArgument();
+    this.classToCheckAgainst = getTypeArgument();
   }
 
-  private final Class<?> geTypeArgument() {
+  private final Class<?> getTypeArgument() {
     List<Class<?>> typeArguments = new GenericTypeScanner().scanForGenericTypes(this);
     if (typeArguments.size()==1) {
       return typeArguments.get(0);
@@ -54,6 +54,10 @@ extends ArrayList<E> {
     else {
       throw new IllegalArgumentException("this class is currently limited to one type Argument only");
     }
+  }
+
+  protected Class<?> getClassToCheckAgainst() {
+    return classToCheckAgainst;
   }
 
   /**
