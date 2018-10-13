@@ -1,5 +1,6 @@
-package com.github.ralferic42.dontdothis.reifiedcollections;
+package com.github.ralferic42.dontdothis.reifiedcollections.reified;
 
+import com.github.ralferic42.dontdothis.reifiedcollections.reified.ReifiedArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 

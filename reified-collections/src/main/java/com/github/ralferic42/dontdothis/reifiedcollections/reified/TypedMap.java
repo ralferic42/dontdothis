@@ -1,4 +1,4 @@
-package com.github.ralferic42.dontdothis.reifiedcollections;
+package com.github.ralferic42.dontdothis.reifiedcollections.reified;
 
 import java.util.Collection;
 import java.util.HashMap;

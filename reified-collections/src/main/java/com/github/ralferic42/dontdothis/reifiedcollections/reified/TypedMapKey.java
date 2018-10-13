@@ -1,6 +1,4 @@
-package com.github.ralferic42.dontdothis.reifiedcollections;
-
-import java.util.Objects;
+package com.github.ralferic42.dontdothis.reifiedcollections.reified;
 
 /**
  * key used by {@link TypedMap} which provides a reference to the stored type

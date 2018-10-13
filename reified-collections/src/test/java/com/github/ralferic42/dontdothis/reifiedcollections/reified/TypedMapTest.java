@@ -1,5 +1,7 @@
-package com.github.ralferic42.dontdothis.reifiedcollections;
+package com.github.ralferic42.dontdothis.reifiedcollections.reified;
 
+import com.github.ralferic42.dontdothis.reifiedcollections.reified.TypedMap;
+import com.github.ralferic42.dontdothis.reifiedcollections.reified.TypedMapKey;
 import org.junit.Assert;
 import org.junit.Test;
 
