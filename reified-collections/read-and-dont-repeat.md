@@ -13,7 +13,7 @@ The first software i know of using this trick is the guice dependency injection 
 
 ## Lets see it in action, Part 1: reified ArrayList
 
-## Lets see it in action, Part 2: reified ArrayList
+## Lets see it in action, Part 2: Type encoded in the Map-Key
 
 ## Drawbacks and Problems
 
