@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Scanner for generic type arguments, usable only after construction of an instance of an anonymous class
  */
-public class GenericTypeScanner {
+public class GenericTypeInfo {
 
   public List<Class<?>> scanForGenericTypes(Object createdInstance) {
     List<Class<?>> resultList = new ArrayList<>();

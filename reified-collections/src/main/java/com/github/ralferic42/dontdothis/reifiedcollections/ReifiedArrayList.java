@@ -47,7 +47,7 @@ extends ArrayList<E> {
   }
 
   private final Class<?> getTypeArgument() {
-    List<Class<?>> typeArguments = new GenericTypeScanner().scanForGenericTypes(this);
+    List<Class<?>> typeArguments = new GenericTypeInfo().scanForGenericTypes(this);
     if (typeArguments.size()==1) {
       return typeArguments.get(0);
     }
