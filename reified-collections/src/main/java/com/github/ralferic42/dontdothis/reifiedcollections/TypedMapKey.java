@@ -22,9 +22,4 @@ public abstract class TypedMapKey<T> {
     return classToCast.cast(o);
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(classToCast);
-  }
-
 }
