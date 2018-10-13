@@ -17,11 +17,14 @@ public class TypedMap {
   }
 
   public <T> T get(TypedMapKey<T> key) {
-    return null;
+    Object content = innerMap.get(key);
+    return key.cast(content);
   }
 
   public <T> T put(TypedMapKey<T> key, T value) {
-    return null;
+    T verifiedContent = key.cast(value);
+    Object previousContent = innerMap.put(key, verifiedContent);
+    return key.cast(previousContent);
   }
 
   public int size() {
@@ -55,4 +58,5 @@ public class TypedMap {
   public Set<Map.Entry<TypedMapKey<?>, Object>> entrySet() {
     return innerMap.entrySet();
   }
+
 }
