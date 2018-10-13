@@ -40,4 +40,12 @@ public class GenericTypeInfo {
 
   }
 
+  public ParameterizedType getParameterizedType() {
+    return parameterizedType;
+  }
+
+  public List<Class<?>> getRawTypes() {
+    return rawTypes;
+  }
+
 }

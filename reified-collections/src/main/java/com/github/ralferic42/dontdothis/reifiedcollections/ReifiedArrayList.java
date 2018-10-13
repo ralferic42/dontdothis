@@ -29,25 +29,29 @@ extends ArrayList<E> {
 
   }
 
+  private final GenericTypeInfo genericTypeInfo;
   private final Class<?> classToCheckAgainst;
 
   public ReifiedArrayList(int initialCapacity) {
     super(initialCapacity);
-    this.classToCheckAgainst = getTypeArgument();
+    this.genericTypeInfo = new GenericTypeInfo(this);
+    this.classToCheckAgainst = getClassToCheckAgainst( this.genericTypeInfo );
   }
 
   public ReifiedArrayList() {
     super();
-    this.classToCheckAgainst = getTypeArgument();
+    this.genericTypeInfo = new GenericTypeInfo(this);
+    this.classToCheckAgainst = getClassToCheckAgainst( this.genericTypeInfo );
   }
 
   public ReifiedArrayList(Collection<? extends E> c) {
+    this.genericTypeInfo = new GenericTypeInfo(this);
+    this.classToCheckAgainst = getClassToCheckAgainst( this.genericTypeInfo );
     super.addAll( validateCollection(c) );
-    this.classToCheckAgainst = getTypeArgument();
   }
 
-  private final Class<?> getTypeArgument() {
-    List<Class<?>> typeArguments = new GenericTypeInfo().scanForGenericTypes(this);
+  private final Class<?> getClassToCheckAgainst(GenericTypeInfo typeInfo) {
+    List<Class<?>> typeArguments = typeInfo.getRawTypes();
     if (typeArguments.size()==1) {
       return typeArguments.get(0);
     }
