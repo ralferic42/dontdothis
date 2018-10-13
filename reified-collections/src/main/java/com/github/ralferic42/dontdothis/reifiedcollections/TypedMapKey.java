@@ -23,14 +23,6 @@ public abstract class TypedMapKey<T> {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof TypedMapKey)) return false;
-    TypedMapKey<?> that = (TypedMapKey<?>) o;
-    return Objects.equals(classToCast, that.classToCast);
-  }
-
-  @Override
   public int hashCode() {
     return Objects.hash(classToCast);
   }
