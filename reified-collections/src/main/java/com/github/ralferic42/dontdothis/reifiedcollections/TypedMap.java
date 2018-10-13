@@ -1,6 +1,7 @@
 package com.github.ralferic42.dontdothis.reifiedcollections;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -12,8 +13,8 @@ import java.util.Set;
 public class TypedMap {
   private final Map<TypedMapKey<?>,Object> innerMap;
 
-  public TypedMap(Map<TypedMapKey<?>, Object> innerMap) {
-    this.innerMap = innerMap;
+  public TypedMap() {
+    this.innerMap = new HashMap<>();
   }
 
   public <T> T get(TypedMapKey<T> key) {
